@@ -3,38 +3,52 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - penality</title>
+    <title>@ViewData["Title"] CSDR Penalty</title>
+    
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/penality.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Hackathon.styles.css" asp-append-version="true" />
 </head>
 <body>
+    <div id="pgborder"> 
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">penality</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ReferenceData">Reference Data</a>
-                        </li>
-                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Reports">Reports</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <h1>
+            <div class="text-container">
+        <span class="outline-box">CSDR Penalty</span>
+    </div>
+    </h1>
+        <div id="dateContainer">
+        <h6 id="currentDate">Date</h6>
+        </div>
+        <div id="admin">
+           
+            <a href="mailto:admin@capgemini.com">admin@capgemini.com</a>
+        </div>
+        <script>
+        var currentDateElement = document.getElementById('currentDate');
+        var currentDate = new Date().toLocaleDateString();
+        currentDateElement.textContent = currentDate;
+    </script>
+        
+
+
+
+
+
+        <nav>
+        <ul>
+            <li class="n"><a class="colr" asp-area="" asp-controller="Home" asp-action="">Report</a></li>
+            <li class="n"><a class="colr" asp-area="" asp-controller="Home" asp-action="Penalties">Penalty</a></li>
+            <li class="n"><div class="dropdown">
+                                 <a class="colr" asp-area="" asp-controller="Home" asp-action="">Users</button></a>
+                                 <div class="dropdown-content">
+                                   <a href="#">Register</a>
+                                 </div>
+                            </div>
+            </li>
+            
+        </ul>
+    </nav>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -44,12 +58,23 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - penality - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - CSDR Penalty - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    </div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
