@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Penalties </title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .btn {
+      padding: 6px 12px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .btn-r {
+      background-color: #f44336;
+    }
+  </style>
+</head>
+<body>
+  <h1>Penalties </h1>
+  <h2>View all penalty details</h2>
+  <table>
+    <tr>
+      <th>Penalty Type</th>
+      <th>Description</th>
+      <th>Amount</th>
+      <th>Securities Quantity</th>
+      <th>Securities & Reference Data</th>
+    </tr>
+    <tr>
+      <td>Abc</td>
+      <td>abc</td>
+      <td>0</td>
+      <td>0</td>
+      <td>Securities 1, Reference Data 1</td>
+    </tr>
+    <tr>
+      <td>Xyz</td>
+      <td>xyz</td>
+      <td>0</td>
+      <td>0</td>
+      <td>Securities 2, Reference Data 2</td>
+    </tr>
+    <!-- Add more rows for other penalties -->
+  </table>
+
+  <h2>Update Penalties</h2>
+  <div>
+    <label for="penalty-type">Penalty Type:</label>
+    <input type="text" id="penalty-type" placeholder="Enter penalty type">
+  </div>
+  <div>
+    <label for="penalty-description">Description:</label>
+    <input type="text" id="penalty-description" placeholder="Enter penalty description">
+  </div>
+  <div>
+    <label for="penalty-amount">Amount:</label>
+    <input type="text" id="penalty-amount" placeholder="Enter penalty amount">
+  </div>
+  <div>
+    <label for="security-qty">Securities Quantity:</label>
+    <input type="text" id="security-qty" placeholder="Enter securities quantity">
+  </div>
+  <div>
+    <label for="penalty-securities">Securities & Reference Data:</label>
+    <input type="text" id="penalty-securities" placeholder="Enter securities & reference data">
+  </div>
+  <button class="btn">Add</button>
+  <button class="btn btn-r">Remove</button>
+  <button class="btn">Update</button>
+
+  <h2>Validate or Reject Updated Penalties</h2>
+  <div>
+    <label for="validation-comments">Validation Comments:</label>
+    <input type="text" id="validation-comments" placeholder="Enter validation comments">
+  </div>
+  <button class="btn">Validate</button>
+  <button class="btn btn-r">Reject</button>
+</body>
+</html>
+
