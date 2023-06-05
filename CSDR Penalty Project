@@ -1,0 +1,231 @@
+                             ---------------------------Transaction------------------------ 
+
+-- Table: public.Transaction
+
+-- DROP TABLE IF EXISTS public."Transaction";
+
+CREATE TABLE IF NOT EXISTS public."Transaction"
+(
+    "Place of Holding Tech Number" smallint NOT NULL,
+    "ISIN" character(12) COLLATE pg_catalog."default" NOT NULL,
+    "Security Quantity" integer NOT NULL,
+    "Transaction Type Code" character(4) COLLATE pg_catalog."default" NOT NULL,
+    "Instruction Type code" character(4) COLLATE pg_catalog."default" NOT NULL,
+    "Matching Reference" character(16) COLLATE pg_catalog."default" NOT NULL,
+    "Settlement Date" date NOT NULL,
+    "Place of Settlement" character(11) COLLATE pg_catalog."default" NOT NULL,
+    "Settlement cash amount" numeric(10,0) NOT NULL,
+    "Calendar Id" character(10) COLLATE pg_catalog."default" NOT NULL,
+    "Party Id" character(16) COLLATE pg_catalog."default" NOT NULL,
+    "Counter Party Id" character(16) COLLATE pg_catalog."default" NOT NULL,
+    "Party Role Cd" character(6) COLLATE pg_catalog."default" NOT NULL,
+    "Counter Party Role Cd" character(6) COLLATE pg_catalog."default" NOT NULL,
+    "Failing Party Role Cd" character(6) COLLATE pg_catalog."default" NOT NULL,
+    "Penalty Amount" numeric(10,0) NOT NULL,
+    "Sign" "char",
+    CONSTRAINT "Reports_pkey" PRIMARY KEY ("Place of Holding Tech Number")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public."Transaction"
+    OWNER to postgres;
+
+
+
+                          --------------------------- Security Price -------------------------
+
+-- Table: public.Security Price
+
+-- DROP TABLE IF EXISTS public."Security Price";
+
+CREATE TABLE IF NOT EXISTS public."Security Price"
+(
+    "ID" bigint NOT NULL,
+    "POH" smallint NOT NULL,
+    "ISIN SEC ID" character(12) COLLATE pg_catalog."default" NOT NULL,
+    "VALID FROM DATE" date NOT NULL,
+    "Security Price" numeric(12,0) NOT NULL,
+    CONSTRAINT "Security Price_pkey" PRIMARY KEY ("ID")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public."Security Price"
+    OWNER to postgres;
+
+
+
+                        -------------------------------Logger---------------------------------
+
+-- Table: public.Logger Table
+
+-- DROP TABLE IF EXISTS public."Logger Table";
+
+CREATE TABLE IF NOT EXISTS public."Logger Table"
+(
+    "ID" smallint NOT NULL,
+    user_name character(12) COLLATE pg_catalog."default" NOT NULL,
+    "AccessDate" date NOT NULL,
+    "AccessPage" character(20) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "Logger Table_pkey" PRIMARY KEY ("ID")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public."Logger Table"
+    OWNER to postgres;
+
+
+                        --------------------------------Login-----------------------------------
+
+-- Table: public.Login 
+
+-- DROP TABLE IF EXISTS public."Login ";
+
+CREATE TABLE IF NOT EXISTS public."Login "
+(
+    "Email_Id" text COLLATE pg_catalog."default" NOT NULL,
+    "Password" character(20) COLLATE pg_catalog."default" NOT NULL,
+    "First Name" character(20) COLLATE pg_catalog."default" NOT NULL,
+    "Last Name" character(20) COLLATE pg_catalog."default" NOT NULL,
+    "Remarks/comments" character(20) COLLATE pg_catalog."default" NOT NULL,
+    "Date Of Join" date NOT NULL,
+    "ID" bigint NOT NULL,
+    "IsActiveorNot" boolean NOT NULL,
+    CONSTRAINT "Login _pkey" PRIMARY KEY ("ID")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public."Login "
+    OWNER to postgres;
+
+
+
+                         -------------------------- Registration -------------------------
+
+-- Table: public.RegistrationTable
+
+-- DROP TABLE IF EXISTS public."RegistrationTable";
+
+CREATE TABLE IF NOT EXISTS public."RegistrationTable"
+(
+    "Id" smallint NOT NULL,
+    "FirstName" character(20) COLLATE pg_catalog."default" NOT NULL,
+    "LastName" character(20) COLLATE pg_catalog."default" NOT NULL,
+    "Email Id" character(50) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "RegistrationTable_pkey" PRIMARY KEY ("Id"),
+    CONSTRAINT "Email_Id" UNIQUE ("Email Id")
+        INCLUDE("Id", "FirstName", "LastName")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public."RegistrationTable"
+    OWNER to postgres;
+
+
+
+
+                            ---------------------- Security Penality Penalty ---------------------
+
+-- Table: public.Security Penalty Rate
+
+-- DROP TABLE IF EXISTS public."Security Penalty Rate";
+
+CREATE TABLE IF NOT EXISTS public."Security Penalty Rate"
+(
+    "ID" bigint NOT NULL,
+    "VALID FROM DATE" date,
+    "Penalty Rate" numeric(12,0),
+    "Last Updated Date" date,
+    CONSTRAINT "Security Penalty Rate_pkey" PRIMARY KEY ("ID")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public."Security Penalty Rate"
+    OWNER to postgres;
+
+
+
+                                    ---------------------- Holiday Calendar ---------------------
+
+
+-- Table: public.Holiday Calendar
+
+-- DROP TABLE IF EXISTS public."Holiday Calendar";
+
+CREATE TABLE IF NOT EXISTS public."Holiday Calendar"
+(
+    "ID" smallint NOT NULL,
+    "Holiday Date" date NOT NULL,
+    "Last Updated Date" date NOT NULL,
+    "CID" smallint NOT NULL,
+    CONSTRAINT "Holiday Calendar_pkey" PRIMARY KEY ("ID"),
+    CONSTRAINT "CountryID" FOREIGN KEY ("CID")
+        REFERENCES public."Country" ("ID") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public."Holiday Calendar"
+    OWNER to postgres;
+-- Index: fki_CountyID
+
+-- DROP INDEX IF EXISTS public."fki_CountyID";
+
+CREATE INDEX IF NOT EXISTS "fki_CountyID"
+    ON public."Holiday Calendar" USING btree
+    ("CID" ASC NULLS LAST)
+    TABLESPACE pg_default;
+
+                                 -----------------------Country -----------------------------
+
+
+-- Table: public.Country
+
+-- DROP TABLE IF EXISTS public."Country";
+
+CREATE TABLE IF NOT EXISTS public."Country"
+(
+    "ID" smallint NOT NULL,
+    "Name" character(12) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "Country_pkey" PRIMARY KEY ("ID")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public."Country"
+    OWNER to postgres;
+
+
+
+
+                                   --------------------- Authorization ----------------------
+
+-- Table: public.Authorization
+
+-- DROP TABLE IF EXISTS public."Authorization";
+
+CREATE TABLE IF NOT EXISTS public."Authorization"
+(
+    "ID" smallint NOT NULL,
+    "Email_Id" character(1) COLLATE pg_catalog."default" NOT NULL,
+    "FirstName" character(1) COLLATE pg_catalog."default" NOT NULL,
+    "Last Name" character(1) COLLATE pg_catalog."default" NOT NULL,
+    "Authorized" character(1) COLLATE pg_catalog."default" NOT NULL,
+    "Access Page" character(1) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT "Authorization_pkey" PRIMARY KEY ("ID")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public."Authorization"
+    OWNER to postgres;
+
+
